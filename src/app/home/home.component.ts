@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import {log} from 'util';
 
-type User = {name: string, age: number | string, jobs: string[], logName: () => void, logAge?: () => void};
+interface User {
+  name: string;
+  age: number | string;
+  jobs: string[];
+  logName: () => void;
+  logAge?: () => void;
+}
 
 @Component({
   selector: 'app-home',
@@ -19,8 +26,35 @@ export class HomeComponent implements OnInit {
   array4: Array<boolean>;
   array5: boolean[] = [false, false];
   array6: [number, string, boolean];
+  someArray: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  constructor() { }
+  constructor() {
+    const name = 'max';
+    const age = 30;
+    const obj = {
+      name,
+      age,
+      func() {
+        const full = `${name + age}`;
+      }
+    };
+    // console.log(obj);
+
+    const obj2 = {
+      objName: 'power',
+      objAge: 33,
+    };
+
+    // @ts-ignore
+    const {objName: oN, objAge: oA, objJob: oJ = 'pre'} = obj2;
+    // console.log(oN, oA, oJ);
+
+    const arr = ['max', 'power'];
+
+    const [arraName, arrSurname, arrAge = 25] = arr;
+    console.log(arraName, arrSurname, arrAge);
+
+  }
 
   ngOnInit() {
     this.str = '1';
@@ -34,7 +68,7 @@ export class HomeComponent implements OnInit {
     this.array4 = [true, true, false];
     this.array6 = [1, '2', false];
 
-    console.log( this.func(2, 'five'));
+    // console.log( this.func(2, 'five'));
     this.func2();
 
     const user: User = {
@@ -58,6 +92,8 @@ export class HomeComponent implements OnInit {
       }
     };
 
+    this.func3(1, ...this.someArray);
+
   }
 
   func(a: number, b: string): Array<any> {
@@ -70,7 +106,13 @@ export class HomeComponent implements OnInit {
     console.log('void function');
   }
 
+  func3(a, ...rest): void {
 
+    rest.forEach((i) => {
+      console.log(i);
+    });
+    console.log(a, ...rest);
+  }
 
 
 }
