@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
 
   str = '12';
   num = 21;
+  car: {carName: string, carYear: number, sold: boolean};
+  car2: Array<string>;
   a: boolean | number;
   array: number[];
   array2: Array<number>;
@@ -94,6 +96,8 @@ export class HomeComponent implements OnInit {
       password: ['']
     });
 
+    this.car = {carName: 'BMW', carYear: 2019, sold: false};
+    this.car2 = ['mazda', 'lada'];
     this.str = '1';
     this.num = 2;
     this.a = false;
