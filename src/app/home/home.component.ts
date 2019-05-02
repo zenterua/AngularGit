@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {timer } from 'rxjs';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 interface User {
   name: string;
@@ -18,6 +19,8 @@ interface User {
 
 export class HomeComponent implements OnInit {
 
+  reactForm: FormGroup;
+
   str = '12';
   num = 21;
   a: boolean | number;
@@ -31,7 +34,7 @@ export class HomeComponent implements OnInit {
   someFindArr: any = [1, 2, 3, 4, 5].find(x => x > 3);
   hello22 = 'Hello != Max Power';
 
-  constructor() {
+  constructor(private formBuilder: FormBuilder) {
     console.log(this.someFindArr);
     console.log('str hello22 ->>> ', this.hello22.includes('!'));
     const name = 'max';
@@ -70,6 +73,27 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // Simple react form
+    // this.reactForm = new FormGroup({
+    //   email: new FormControl(''),
+    //   login: new FormControl(''),
+    //   password: new FormControl('')
+    // });
+
+    // Form builder
+    // this.reactForm = this.formBuilder.group({
+    //   email: ['', Validators.compose([Validators.required, Validators.email]) ],
+    //   login: [''],
+    //   password: ['']
+    // });
+
+    this.reactForm = this.formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.email]) ],
+      login: [''],
+      password: ['']
+    });
+
     this.str = '1';
     this.num = 2;
     this.a = false;
@@ -150,6 +174,10 @@ export class HomeComponent implements OnInit {
       console.log(i);
     });
     console.log(a, ...rest);
+  }
+
+  submit() {
+    console.log(this.reactForm);
   }
 
 }

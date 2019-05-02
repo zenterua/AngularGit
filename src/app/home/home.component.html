@@ -1,3 +1,19 @@
 <h1>Hello to GitHub!</h1>
 <p>bla bla</p>
 
+<form [formGroup]="reactForm" (ngSubmit)="submit()">
+  <label>
+    <input type="email" placeholder="email" formControlName="email">
+  </label>
+
+  <label>
+    <input type="text" placeholder="login" formControlName="login">
+  </label>
+
+  <label>
+    <input type="password" placeholder="password" formControlName="password">
+  </label>
+
+  <button type="submit">submit</button>
+
+</form>
